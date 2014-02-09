@@ -48,6 +48,7 @@
       	line-height: 1.1em;
       	margin: 20px 0;
       }
+      
     </style>
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -76,7 +77,7 @@
 
 	$(document).ready(function() {
 		$.getJSON("/data.json").success(function(data) {	
-			$('.total-count').html(data.length + " entries.");		
+			$('.total-count').html(data.length + " entries");		
 			data.forEach(function(item, index) {
 				//console.log(item.status);
 				var icon_img;
@@ -133,9 +134,7 @@
     	<p class="total-count"></p>
     	<p><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"> Power is out</p>
     	<p><img src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"> Power was out</p>
-    	<p><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png"> Power is OK</p>
-    	<p><a href="http://dailyemerald.com/topics/uo-snow-day/">Related Emerald stories</a></p>
-    	<p><a href="http://dailyemerald.com/2014/02/09/do-you-have-power/">Add yourself to this map</a></p>
+    	<p><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png"> Power is OK</p>  
     </div>
   </body>
 </html>
