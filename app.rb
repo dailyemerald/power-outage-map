@@ -30,6 +30,10 @@ end
 
 class App < Sinatra::Base
 
+	configure do
+		set :protection, except: [:frame_options]
+	end
+
 	get '/' do
 		erb :index
 	end
