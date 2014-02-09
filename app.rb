@@ -52,11 +52,19 @@ class App < Sinatra::Base
 		$redis.hgetall('geocoded').to_json
 	end
 
+	get '/data.json' do
+		headers['Access-Control-Allow-Origin'] = '*'
+        headers["Access-Control-Allow-Methods"] = 'GET'
+		content_type 'application/json'
+		$redis.get('cached_json')		
+	end
+
 	get '/pull_data' do
 		
 		response = HTTParty.get($url)
 		content_type "application/json"
-		CSV.parse(response.body, :headers => true).map{|line|
+		
+		json_output = CSV.parse(response.body, :headers => true).map{|line|
 			record = line.to_hash.inject({}){|obj, item|
 				obj[item.first.downcase.strip.gsub('?', '').gsub(/[^a-z]/, "_").downcase] = item.last # this is ugly. basically, wrangle the ugly column header into a decent key
 				obj
@@ -83,7 +91,12 @@ class App < Sinatra::Base
 
 			record
 
+		}.select{|item|
+			!item['did_your_power_go_out'].nil?
 		}.to_json
+
+		$redis.set('cached_json', json_output)
+		json_output
 		
 	end
 end
