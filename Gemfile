@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+ruby '2.0.0'
+
+gem 'redis'
+gem 'puma'
+gem 'sinatra'
+gem 'httparty'
+gem 'activesupport'
+gem 'celluloid'
+gem 'dotenv'
+gem 'geocoder'
